@@ -7,7 +7,10 @@ class TestService:
     def submit_test(self, db, user_id, answers_data, ip_address, duration_seconds):
         questions = db.query(TestQuestion).filter(TestQuestion.is_active == True).all()
         q_list = [{"id": str(q.id), "dimension": q.dimension.code if q.dimension else "EI"} for q in questions]
+        print(f"[DEBUG] q_list len={len(q_list)}, first dim={q_list[0]['dimension'] if q_list else 'EMPTY'}")
+        print(f"[DEBUG] answers_data len={len(answers_data)}, first 3={answers_data[:3]}")
         mbti_type, scores = calculate_mbti(answers_data, q_list)
+        print(f"[DEBUG] calculated scores={scores}")
         result_data = generate_result_data(mbti_type, scores)
         result = UserTestResult(
             user_id=user_id, result_type=mbti_type,
