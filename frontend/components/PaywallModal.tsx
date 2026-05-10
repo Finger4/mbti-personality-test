@@ -92,8 +92,8 @@ export default function PaywallModal({ resultId, resultType, onUnlocked, onClose
                 <input type="hidden" name="cmd" value="_s-xclick" />
                 <input type="hidden" name="hosted_button_id" value="D775B7YMTRD2G" />
                 <input type="hidden" name="currency_code" value="USD" />
-                <button type="submit" className="w-full py-3 bg-paypal-blue text-white rounded-xl font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-                  <span>🇿🇦</span> PayPal 立即解锁 (USD $9.9)
+                <button type="submit" className="w-full py-3 text-white rounded-xl font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2" style={{backgroundColor: "#003087"}}>
+                  <span>💳</span> PayPal 立即解锁 (USD $9.9)
                 </button>
               </form>
               <button onClick={onClose} className="w-full py-2 text-gray-400 text-sm hover:text-gray-600">
