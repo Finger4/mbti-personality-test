@@ -17,7 +17,7 @@ class PaymentOrder(Base):
     pay_url = Column(String(500), nullable=True)   # 支付链接
     paid_at = Column(DateTime, nullable=True)
     expire_at = Column(DateTime, nullable=True)
-    metadata = Column(JSON, nullable=True)
+    extra_data = Column(JSON, nullable=True)
     created_at = Column(DateTime, server_default="now()")
     user = relationship("User")
     result = relationship("UserTestResult")
