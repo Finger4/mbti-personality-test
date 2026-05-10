@@ -25,8 +25,9 @@ USER nextjs
 EXPOSE 3000
 ENV PORT 3000
 
-COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# public 目录可能不存在，仅在存在时复制
+RUN if [ -d /app/public ]; then cp -r /app/public ./public; fi
 
 CMD ["node", "server.js"]
