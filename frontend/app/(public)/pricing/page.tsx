@@ -64,7 +64,7 @@ export default function PricingPage() {
 
           <div className="mt-12 text-gray-500 text-sm">
             <p>💳 所有支付通过微信支付安全加密处理</p>
-            <p className="mt-2">📧 付费后如有问题联系 duyping525@163.com</p>
+            <p className="mt-2">📧 付费后如有问题联系 Finger4@foxmail.com</p>
           </div>
         </div>
       </section>
