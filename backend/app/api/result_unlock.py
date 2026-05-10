@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.payment import PaymentOrder, UnpaidResultAccess
 from app.models.result import UserTestResult
-from app.core.dependencies import get_current_user
+from app.core.dependencies import get_current_user, get_current_user_optional
 
 router = APIRouter(prefix="/api/result", tags=["result_unlock"])
 
@@ -53,7 +53,7 @@ def is_result_unlocked(db: Session, result_id: str, user_id: str | None = None, 
 def api_get_full_result(
     result_id: str,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user(optional=True)),
+    current_user=Depends(get_current_user_optional),
     ip_address: str = "127.0.0.1",
 ):
     """获取完整结果（含付费内容）"""
