@@ -11,7 +11,7 @@ from app.services.payment_service import (
 )
 from app.core.dependencies import get_current_user, get_current_user_optional
 
-router = APIRouter(prefix="/api/payment", tags=["payment"])
+router = APIRouter(prefix="/payment", tags=["payment"])
 
 @router.post("/create", response_model=OrderResponse)
 def api_create_order(

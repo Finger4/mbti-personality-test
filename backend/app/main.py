@@ -22,18 +22,18 @@ app.add_middleware(
 )
 
 # Register routers
-app.include_router(auth.router)
-app.include_router(test.router)
-app.include_router(user.router)
-app.include_router(contact.router)
-app.include_router(admin.router)
-app.include_router(payment.router)
-app.include_router(result_unlock.router)
+app.include_router(auth.router, prefix="/api")
+app.include_router(test.router, prefix="/api")
+app.include_router(user.router, prefix="/api")
+app.include_router(contact.router, prefix="/api")
+app.include_router(admin.router, prefix="/api")
+app.include_router(payment.router, prefix="/api")
+app.include_router(result_unlock.router, prefix="/api")
 
-@app.get("/")
+@app.get("/api")
 def root():
     return {"message": "MBTI Personality Test API", "version": "1.0.0"}
 
-@app.get("/health")
+@app.get("/api/health")
 def health():
     return {"status": "ok"}
