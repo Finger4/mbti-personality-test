@@ -18,7 +18,7 @@ export default function LoginPage() {
     setLoading(true)
     setError("")
     try {
-      const data = await fetchAPI("/api/auth/login", {
+      const data = await fetchAPI("/api/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       })
