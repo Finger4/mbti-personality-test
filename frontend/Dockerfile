@@ -2,7 +2,9 @@ FROM node:20-alpine AS base
 
 FROM base AS deps
 WORKDIR /app
-COPY package.json package-lock.json* ./
+COPY package.json ./
+# 如果没有 package-lock.json 先生成
+RUN if [ ! -f package-lock.json ]; then npm install --package-lock-only; fi
 RUN npm ci
 
 FROM base AS builder
