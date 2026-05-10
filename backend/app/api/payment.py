@@ -9,7 +9,7 @@ from app.schemas.payment import (
 from app.services.payment_service import (
     create_payment_order, generate_pxpay_url, check_order_status, mark_order_paid
 )
-from app.core.dependencies import get_current_user
+from app.core.dependencies import get_current_user, get_current_user_optional
 
 router = APIRouter(prefix="/api/payment", tags=["payment"])
 
@@ -17,7 +17,7 @@ router = APIRouter(prefix="/api/payment", tags=["payment"])
 def api_create_order(
     req: CreateOrderRequest,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user(optional=True)),
+    current_user=Depends(get_current_user_optional),
 ):
     """创建支付订单"""
     user_id = str(current_user.id) if current_user else None
@@ -62,7 +62,7 @@ def api_pay_callback(
 def api_check_unlock(
     result_id: str,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user(optional=True)),
+    current_user=Depends(get_current_user_optional),
 ):
     """检查结果是否已解锁付费内容"""
     from app.models.payment import PaymentOrder, UnpaidResultAccess
