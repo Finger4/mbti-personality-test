@@ -74,6 +74,22 @@ export default function TestPage() {
   }
 
   const q = questions[currentQuestion]
+
+  if (!q) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="text-5xl mb-4">😔</div>
+          <h2 className="text-xl font-heading font-bold mb-2">题目加载失败</h2>
+          <p className="text-gray-500 mb-6">无法加载测试题目，请检查网络后重试</p>
+          <button onClick={() => window.location.reload()} className="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700">
+            重新加载
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   const progress = ((currentQuestion + 1) / questions.length) * 100
 
   return (
