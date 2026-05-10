@@ -16,7 +16,7 @@ export default function TestPage() {
 
   useEffect(() => {
     startTest()
-    fetchAPI("/api/test/questions").then((data) => {
+    fetchAPI("/api/questions").then((data) => {
       setQuestions(data)
       setLoading(false)
     }).catch(() => {
@@ -32,7 +32,7 @@ export default function TestPage() {
     setSubmitting(true)
     const duration = startTime ? Math.round((Date.now() - startTime) / 1000) : 0
     try {
-      const res = await fetchAPI("/api/test/submit", {
+      const res = await fetchAPI("/api/submit", {
         method: "POST",
         headers: { Authorization: token ? `Bearer ${token}` : "" },
         body: JSON.stringify({

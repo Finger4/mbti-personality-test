@@ -20,7 +20,7 @@ export default function ResultPage() {
 
   useEffect(() => {
     // 先获取基本信息（不付费也能看）
-    fetchAPI(`/api/test/result/${params.id}`)
+    fetchAPI(`/api/result/${params.id}`)
       .then((data) => {
         setBasicResult(data)
         // 尝试获取完整结果
