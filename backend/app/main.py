@@ -1,12 +1,17 @@
 """FastAPI main entry."""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import auth, test, user, admin, contact
 from app.database import engine, Base
+from app.api import auth, test, user, contact, admin, payment, result_unlock
 
+# Create tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="MBTI Personality Test API", version="1.0.0")
+app = FastAPI(
+    title="MBTI Personality Test API",
+    version="1.0.0",
+    description="MBTI 十六型人格测试后端 API",
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -16,12 +21,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
-app.include_router(test.router, prefix="/api/test", tags=["test"])
-app.include_router(user.router, prefix="/api/user", tags=["user"])
-app.include_router(admin.router, prefix="/api/admin", tags=["admin"])
-app.include_router(contact.router, prefix="/api/contact", tags=["contact"])
+# Register routers
+app.include_router(auth.router)
+app.include_router(test.router)
+app.include_router(user.router)
+app.include_router(contact.router)
+app.include_router(admin.router)
+app.include_router(payment.router)
+app.include_router(result_unlock.router)
 
-@app.get("/api/health")
+@app.get("/")
+def root():
+    return {"message": "MBTI Personality Test API", "version": "1.0.0"}
+
+@app.get("/health")
 def health():
     return {"status": "ok"}
