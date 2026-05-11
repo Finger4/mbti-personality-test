@@ -1,5 +1,5 @@
-import StatsWidget from "@/components/StatsWidget"
 "use client"
+import StatsWidget from "@/components/StatsWidget"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useAuthStore } from "@/lib/store"
