@@ -25,7 +25,8 @@ export default function LoginPage() {
       // Decode token to get user info
       const payload = JSON.parse(atob(data.access_token.split(".")[1]))
       setAuth(data.access_token, { id: payload.sub, username: email.split("@")[0], email, is_admin: false })
-      router.push("/dashboard")
+      // Redirect to home page instead of dashboard
+      router.push("/")
     } catch (err: any) {
       setError(err.message)
     } finally {
