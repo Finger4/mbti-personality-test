@@ -4,6 +4,8 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/lib/store"
 import { fetchAPI } from "@/lib/utils"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 export default function DashboardPage() {
   const { user, token, logout } = useAuthStore()
@@ -22,20 +24,9 @@ export default function DashboardPage() {
   if (!user) return null
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 mbti-gradient rounded-lg flex items-center justify-center text-white font-bold text-sm">M</div>
-            <span className="font-heading font-bold">MBTI 测试</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">欢迎，{user.username}</span>
-            <button onClick={logout} className="text-sm text-gray-500 hover:text-gray-700">退出</button>
-          </div>
-        </div>
-      </nav>
-      <div className="max-w-6xl mx-auto px-4 py-12">
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <Navbar />
+      <div className="flex-1 max-w-6xl mx-auto px-4 py-12 w-full">
         <h1 className="text-2xl font-heading font-bold mb-8">我的主页</h1>
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <div className="bg-white rounded-2xl p-6 shadow-sm">
@@ -73,6 +64,7 @@ export default function DashboardPage() {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

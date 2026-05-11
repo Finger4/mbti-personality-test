@@ -2,6 +2,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { fetchAPI } from "@/lib/utils"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", content: "" })
@@ -25,17 +27,9 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 mbti-gradient rounded-lg flex items-center justify-center text-white font-bold text-sm">M</div>
-            <span className="font-heading font-bold">MBTI 测试</span>
-          </Link>
-          <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">返回首页</Link>
-        </div>
-      </nav>
-      <div className="max-w-2xl mx-auto px-4 py-12">
+    <div className="min-h-screen flex flex-col bg-white">
+      <Navbar />
+      <div className="flex-1 max-w-2xl mx-auto px-4 py-12 w-full">
         <h1 className="text-3xl font-heading font-bold mb-2">联系我们</h1>
         <p className="text-gray-500 mb-8">有任何问题或建议？我们很乐意听到您的声音。</p>
         {success ? (
@@ -69,6 +63,7 @@ export default function ContactPage() {
           </form>
         )}
       </div>
+      <Footer />
     </div>
   )
 }

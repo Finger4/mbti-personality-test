@@ -1,18 +1,12 @@
 import Link from "next/link"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 mbti-gradient rounded-lg flex items-center justify-center text-white font-bold text-sm">M</div>
-            <span className="font-heading font-bold">MBTI 测试</span>
-          </Link>
-          <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">返回首页</Link>
-        </div>
-      </nav>
-      <div className="max-w-4xl mx-auto px-4 py-12">
+    <div className="min-h-screen flex flex-col bg-white">
+      <Navbar />
+      <div className="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
         <h1 className="text-3xl font-heading font-bold mb-8">隐私政策</h1>
         <div className="prose max-w-none text-gray-600 space-y-4">
           <p>您的隐私对我们非常重要。本隐私政策说明了我们会收集哪些信息、如何使用以及保护您的个人信息。</p>
@@ -26,6 +20,7 @@ export default function PrivacyPage() {
           <p>如有任何问题，请通过网站上的联系方式与我们联系。</p>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

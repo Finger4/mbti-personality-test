@@ -7,6 +7,8 @@ import { useAuthStore } from "@/lib/store"
 import PaywallModal from "@/components/PaywallModal"
 import type { TestResult } from "@/types"
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from "recharts"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 export default function ResultPage() {
   const params = useParams()
@@ -42,17 +44,25 @@ export default function ResultPage() {
   }, [params.id])
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <div className="flex-1 flex items-center justify-center bg-gray-50">
+        <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+      <Footer />
     </div>
   )
 
   if (error || !basicResult) return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <p className="text-red-500 mb-4">{error || "结果不存在"}</p>
-        <Link href="/test" className="text-blue-600 hover:underline">返回测试</Link>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <div className="flex-1 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-500 mb-4">{error || "结果不存在"}</p>
+          <Link href="/test" className="text-blue-600 hover:underline">返回测试</Link>
+        </div>
       </div>
+      <Footer />
     </div>
   )
 
@@ -60,22 +70,10 @@ export default function ResultPage() {
   const showLock = !isUnlocked && result === null
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Nav */}
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 mbti-gradient rounded-lg flex items-center justify-center text-white font-bold text-sm">M</div>
-            <span className="font-heading font-bold">MBTI 测试</span>
-          </Link>
-          <div className="flex gap-4">
-            <Link href="/test" className="text-sm text-gray-600 hover:text-gray-900">重新测试</Link>
-            <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">首页</Link>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <Navbar />
 
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
         {/* Result Header - Always visible */}
         <div className="text-center mb-8">
           <p className="text-sm text-gray-500 mb-2">你的 MBTI 性格类型是</p>
@@ -247,6 +245,8 @@ export default function ResultPage() {
           )}
         </div>
       </div>
+
+      <Footer />
 
       {/* Paywall Modal */}
       {showPaywall && (
