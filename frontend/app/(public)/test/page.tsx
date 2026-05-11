@@ -199,7 +199,7 @@ export default function TestPage() {
               <button
                 key={qq.id}
                 onClick={() => setCurrentQuestion(i)}
-                className={"w-[35px] h-[35px] rounded text-xs font-medium transition-colors flex items-center justify-center " + (i === currentQuestion ? "bg-blue-600 text-white" : answers[qq.id] ? "bg-blue-100 text-blue-600" : "bg-gray-200 text-gray-500 hover:bg-gray-300")}
+                className={"w-[33px] h-[33px] rounded text-xs font-medium transition-colors flex items-center justify-center " + (i === currentQuestion ? "bg-blue-600 text-white" : answers[qq.id] ? "bg-blue-100 text-blue-600" : "bg-gray-200 text-gray-500 hover:bg-gray-300")}
               >
                 {i + 1}
               </button>
