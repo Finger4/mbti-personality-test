@@ -107,6 +107,9 @@ export default function TestPage() {
   }
 
   const progress = ((currentQuestion + 1) / questions.length) * 100
+  const allAnswered = Object.keys(answers).length === questions.length
+  const isLastQuestion = currentQuestion === questions.length - 1
+  const canSubmit = isLastQuestion && allAnswered
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -170,13 +173,21 @@ export default function TestPage() {
               <button key={i} onClick={() => setCurrentQuestion(currentQuestion + 1 + i)} className="w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-400" />
             ))}
           </div>
-          {currentQuestion < questions.length - 1 ? (
-            <button onClick={nextQuestion} className="px-4 py-2 text-blue-600 font-medium hover:text-blue-700">
-              下一题 →
+          {isLastQuestion ? (
+            <button
+              onClick={handleSubmit}
+              disabled={!canSubmit || submitting}
+              className={"px-6 py-2 rounded-lg font-medium transition-colors " + (canSubmit ? "bg-green-600 text-white hover:bg-green-700" : "bg-gray-300 text-gray-500 cursor-not-allowed")}
+            >
+              {submitting ? "提交中..." : "提交测试"}
             </button>
           ) : (
-            <button onClick={handleSubmit} disabled={submitting} className="px-6 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50">
-              {submitting ? "提交中..." : "提交测试"}
+            <button
+              onClick={nextQuestion}
+              disabled={!answers[q.id]}
+              className="px-4 py-2 text-blue-600 font-medium disabled:opacity-30 disabled:cursor-not-allowed hover:text-blue-700"
+            >
+              下一题 →
             </button>
           )}
         </div>
