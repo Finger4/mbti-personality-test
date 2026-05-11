@@ -5,9 +5,26 @@ from app.services.scoring import calculate_mbti, generate_result_data
 
 class TestService:
     def submit_test(self, db, user_id, answers_data, ip_address, duration_seconds):
-        questions = db.query(TestQuestion).filter(TestQuestion.is_active == True).all()
+        questions = db.query(TestQuestion).filter(TestQuestion.is_active == True).order_by(TestQuestion.question_number).all()
+        # Build mapping from question_number (1-based) to question UUID
+        q_num_to_uuid = {str(q.question_number): str(q.id) for q in questions}
+        q_uuid_map = {str(q.id): {"dimension": q.dimension.code if q.dimension else "EI"} for q in questions}
+        
+        # Convert numeric question_ids to UUIDs
+        normalized_answers = []
+        for a in answers_data:
+            qid = a["question_id"]
+            # If question_id is a number string, convert to UUID
+            if qid in q_num_to_uuid:
+                normalized_answers.append({
+                    "question_id": q_num_to_uuid[qid],
+                    "chosen_option": a["chosen_option"]
+                })
+            else:
+                normalized_answers.append(a)
+        
         q_list = [{"id": str(q.id), "dimension": q.dimension.code if q.dimension else "EI"} for q in questions]
-        mbti_type, scores = calculate_mbti(answers_data, q_list)
+        mbti_type, scores = calculate_mbti(normalized_answers, q_list)
         result_data = generate_result_data(mbti_type, scores)
         result = UserTestResult(
             user_id=user_id, result_type=mbti_type,
@@ -20,7 +37,7 @@ class TestService:
         db.add(result)
         db.commit()
         db.refresh(result)
-        for a in answers_data:
+        for a in normalized_answers:
             ans = UserAnswer(result_id=result.id, question_id=a["question_id"],
                            chosen_option=a["chosen_option"], score=1 if a["chosen_option"] == "A" else 0)
             db.add(ans)
