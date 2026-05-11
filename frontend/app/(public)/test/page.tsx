@@ -192,17 +192,19 @@ export default function TestPage() {
           )}
         </div>
 
-        {/* Question nav dots */}
-        <div className="mt-6 flex flex-wrap gap-1 justify-center">
-          {questions.map((qq, i) => (
-            <button
-              key={qq.id}
-              onClick={() => setCurrentQuestion(i)}
-              className={"w-8 h-8 rounded text-xs font-medium transition-colors " + (i === currentQuestion ? "bg-blue-600 text-white" : answers[qq.id] ? "bg-blue-100 text-blue-600" : "bg-gray-200 text-gray-500 hover:bg-gray-300")}
-            >
-              {i + 1}
-            </button>
-          ))}
+        {/* Question nav dots - 15 per row, 4 rows max */}
+        <div className="mt-6 max-w-2xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-1">
+            {questions.map((qq, i) => (
+              <button
+                key={qq.id}
+                onClick={() => setCurrentQuestion(i)}
+                className={"w-[36px] h-[36px] rounded text-xs font-medium transition-colors flex items-center justify-center " + (i === currentQuestion ? "bg-blue-600 text-white" : answers[qq.id] ? "bg-blue-100 text-blue-600" : "bg-gray-200 text-gray-500 hover:bg-gray-300")}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
