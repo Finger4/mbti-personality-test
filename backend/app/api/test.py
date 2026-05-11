@@ -1,5 +1,5 @@
 """Test API routes."""
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.schemas.test import TestSubmitRequest, TestSubmitResponse, QuestionResponse, TestResultData
@@ -26,7 +26,8 @@ def submit_test(data: TestSubmitRequest, request: Request, db: Session = Depends
 
 @router.get("/result/{result_id}", response_model=TestResultData)
 def get_result(result_id: str, db: Session = Depends(get_db), user: Optional[User] = Depends(get_current_user_optional)):
-    result = db.query(UserTestResult).filter(UserTestResult.id == result_id).first()
+    from sqlalchemy import text
+    result = db.query(UserTestResult).filter(UserTestResult.id == text(result_id)).first()
     if not result:
         raise HTTPException(status_code=404, detail="Result not found")
     if result.user_id and (not user or result.user_id != user.id):
