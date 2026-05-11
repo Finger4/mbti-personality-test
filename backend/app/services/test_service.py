@@ -9,22 +9,22 @@ class TestService:
         # Build mapping from question_number (1-based) to question UUID
         q_num_to_uuid = {q.question_number: str(q.id) for q in questions}
         
-        # Convert numeric question_ids to UUIDs
+        # Convert numeric question_ids to UUIDs (answers_data is list of dicts from test.py)
         normalized_answers = []
         for a in answers_data:
-            qid_str = str(a.question_id)
-            qid_int = int(a.question_id) if a.question_id.isdigit() else None
+            qid = a["question_id"]
+            qid_int = int(qid) if str(qid).isdigit() else None
             # If question_id is a number, convert to UUID
             if qid_int and qid_int in q_num_to_uuid:
                 normalized_answers.append({
                     "question_id": q_num_to_uuid[qid_int],
-                    "chosen_option": a.chosen_option
+                    "chosen_option": a["chosen_option"]
                 })
             else:
                 # Already a UUID
                 normalized_answers.append({
-                    "question_id": qid_str,
-                    "chosen_option": a.chosen_option
+                    "question_id": str(qid),
+                    "chosen_option": a["chosen_option"]
                 })
         
         q_list = [{"id": str(q.id), "dimension": q.dimension.code if q.dimension else "EI"} for q in questions]
