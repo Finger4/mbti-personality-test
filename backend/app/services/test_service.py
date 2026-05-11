@@ -7,21 +7,25 @@ class TestService:
     def submit_test(self, db, user_id, answers_data, ip_address, duration_seconds):
         questions = db.query(TestQuestion).filter(TestQuestion.is_active == True).order_by(TestQuestion.question_number).all()
         # Build mapping from question_number (1-based) to question UUID
-        q_num_to_uuid = {str(q.question_number): str(q.id) for q in questions}
-        q_uuid_map = {str(q.id): {"dimension": q.dimension.code if q.dimension else "EI"} for q in questions}
+        q_num_to_uuid = {q.question_number: str(q.id) for q in questions}
         
         # Convert numeric question_ids to UUIDs
         normalized_answers = []
         for a in answers_data:
-            qid = a["question_id"]
-            # If question_id is a number string, convert to UUID
-            if qid in q_num_to_uuid:
+            qid_str = str(a.question_id)
+            qid_int = int(a.question_id) if a.question_id.isdigit() else None
+            # If question_id is a number, convert to UUID
+            if qid_int and qid_int in q_num_to_uuid:
                 normalized_answers.append({
-                    "question_id": q_num_to_uuid[qid],
-                    "chosen_option": a["chosen_option"]
+                    "question_id": q_num_to_uuid[qid_int],
+                    "chosen_option": a.chosen_option
                 })
             else:
-                normalized_answers.append(a)
+                # Already a UUID
+                normalized_answers.append({
+                    "question_id": qid_str,
+                    "chosen_option": a.chosen_option
+                })
         
         q_list = [{"id": str(q.id), "dimension": q.dimension.code if q.dimension else "EI"} for q in questions]
         mbti_type, scores = calculate_mbti(normalized_answers, q_list)
