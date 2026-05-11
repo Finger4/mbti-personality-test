@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
-from app.api import auth, test, user, contact, admin, payment, result_unlock
+from app.api import auth, test, user, contact, admin, payment, result_unlock, stats
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -29,6 +29,7 @@ app.include_router(contact.router, prefix="/api")
 app.include_router(admin.router, prefix="/api")
 app.include_router(payment.router, prefix="/api")
 app.include_router(result_unlock.router, prefix="/api")
+app.include_router(stats.router, prefix="/api")
 
 @app.get("/api")
 def root():

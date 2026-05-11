@@ -1,3 +1,4 @@
+import StatsWidget from "@/components/StatsWidget"
 "use client"
 import { useState, useEffect } from "react"
 import Link from "next/link"
@@ -187,6 +188,9 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* Stats Widget */}
+      <StatsWidget />
 
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 py-8">
