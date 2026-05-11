@@ -26,8 +26,12 @@ def submit_test(data: TestSubmitRequest, request: Request, db: Session = Depends
 
 @router.get("/result/{result_id}", response_model=TestResultData)
 def get_result(result_id: str, db: Session = Depends(get_db), user: Optional[User] = Depends(get_current_user_optional)):
-    from sqlalchemy import text
-    result = db.query(UserTestResult).filter(UserTestResult.id == text(result_id)).first()
+    import uuid
+    try:
+        result_uuid = uuid.UUID(result_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid result ID format")
+    result = db.query(UserTestResult).filter(UserTestResult.id == result_uuid).first()
     if not result:
         raise HTTPException(status_code=404, detail="Result not found")
     if result.user_id and (not user or result.user_id != user.id):
