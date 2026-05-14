@@ -74,7 +74,7 @@ export default function Home() {
             <div className="border-2 border-gray-200 rounded-2xl p-8">
               <div className="text-center mb-6">
                 <span className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">免费</span>
-                <div className="text-4xl font-bold mt-4">¥0</div>
+                <div className="text-4xl font-bold mt-4">$0</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-gray-600">
@@ -112,7 +112,7 @@ export default function Home() {
                 </span>
               </div>
               <div className="text-center mb-6">
-                <div className="text-4xl font-bold mt-2 text-blue-600">¥9.9</div>
+                <div className="text-4xl font-bold mt-2 text-blue-600">$1</div>
                 <p className="text-gray-400 text-sm mt-1">一次付费，终身查看</p>
               </div>
               <ul className="space-y-3 mb-6">
