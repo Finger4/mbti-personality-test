@@ -17,7 +17,7 @@ export default function PricingPage() {
             <div className="bg-white border-2 border-gray-200 rounded-2xl p-8">
               <div className="text-center mb-6">
                 <span className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">免费</span>
-                <div className="text-4xl font-bold mt-4">¥0</div>
+                <div className="text-4xl font-bold mt-4">$0</div>
               </div>
               <ul className="space-y-3 mb-8 text-left">
                 <li className="flex items-center gap-2"><span className="text-green-500">✅</span> 60道测试题目</li>
