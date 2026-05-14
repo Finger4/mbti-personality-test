@@ -38,7 +38,7 @@ export default function PricingPage() {
                 <span className="px-4 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-full">🔥 深度分析</span>
               </div>
               <div className="text-center mb-6">
-                <div className="text-4xl font-bold mt-2 text-blue-600">¥9.9</div>
+                <div className="text-4xl font-bold mt-2 text-blue-600">$1</div>
                 <p className="text-gray-400 text-sm mt-1">一次付费，终身查看</p>
               </div>
               <ul className="space-y-3 mb-8 text-left">
