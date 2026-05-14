@@ -30,7 +30,7 @@ def create_payment_order(
     db: Session,
     user_id: str | None,
     result_id: str,
-    amount: int = 990
+    amount: int = 100
 ) -> PaymentOrder:
     """创建支付订单"""
     order_no = generate_order_no()
