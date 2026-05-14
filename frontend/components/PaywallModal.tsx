@@ -20,7 +20,7 @@ export default function PaywallModal({ resultId, resultType, onUnlocked, onClose
     try {
       const data = await fetchAPI("/api/payment/create", {
         method: "POST",
-        body: JSON.stringify({ result_id: resultId, amount: 990 }),
+        body: JSON.stringify({ result_id: resultId, amount: 100 }),
       })
       setOrderNo(data.order_no)
       setStep("qrcode")
@@ -76,8 +76,8 @@ export default function PaywallModal({ resultId, resultType, onUnlocked, onClose
                 </ul>
               </div>
               <div className="text-center mb-4">
-                <span className="text-4xl font-bold text-blue-600">¥9.9</span>
-                <span className="text-gray-400 line-through text-lg ml-2">¥49</span>
+                <span className="text-4xl font-bold text-blue-600">$1</span>
+                <span className="text-gray-400 line-through text-lg ml-2">$4.99</span>
               </div>
             </div>
             <div className="px-8 pb-8 flex flex-col gap-3">
@@ -93,7 +93,7 @@ export default function PaywallModal({ resultId, resultType, onUnlocked, onClose
                 <input type="hidden" name="hosted_button_id" value="D775B7YMTRD2G" />
                 <input type="hidden" name="currency_code" value="USD" />
                 <button type="submit" className="w-full py-3 text-white rounded-xl font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2" style={{backgroundColor: "#003087"}}>
-                  <span>💳</span> PayPal 立即解锁 (USD $9.9)
+                  <span>💳</span> PayPal 立即解锁 (USD $1)
                 </button>
               </form>
               <button onClick={onClose} className="w-full py-2 text-gray-400 text-sm hover:text-gray-600">
@@ -107,7 +107,7 @@ export default function PaywallModal({ resultId, resultType, onUnlocked, onClose
           <>
             <div className="p-8 text-center">
               <h2 className="text-xl font-heading font-bold mb-2">扫码支付</h2>
-              <p className="text-gray-500 text-sm mb-6">请使用微信或支付宝扫码支付 <strong className="text-blue-600">¥9.9</strong></p>
+              <p className="text-gray-500 text-sm mb-6">请使用微信或支付宝扫码支付 <strong className="text-blue-600">$1</strong></p>
               <div className="bg-gray-50 rounded-xl p-4 mb-4 inline-block">
                 {/* 二维码占位 - 实际从API获取 */}
                 <div className="w-48 h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400">
