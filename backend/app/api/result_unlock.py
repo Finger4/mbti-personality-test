@@ -1,5 +1,5 @@
-"""Result unlock verification - replaces inline unlock check in test.py."""
 import uuid
+from app.services.result_builder import build_full_result_response
 from app.database import get_db
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException
